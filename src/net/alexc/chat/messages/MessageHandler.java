@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class MessageHandler implements Runnable {
   private final BufferedReader reader;
-  private boolean running;
+  private volatile boolean running;
 
   public MessageHandler(BufferedReader reader) {
     running = true;

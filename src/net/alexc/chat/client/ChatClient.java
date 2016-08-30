@@ -13,8 +13,8 @@ import java.net.Socket;
 public class ChatClient {
   private final Socket clientSocket;
 
-  public ChatClient() throws IOException {
-    clientSocket = new Socket("localhost", ChatServer.PORT);
+  public ChatClient(int port) throws IOException {
+    clientSocket = new Socket("localhost", port);
   }
 
   private void registerName(BufferedReader reader, PrintWriter writer, BufferedReader stdIn)

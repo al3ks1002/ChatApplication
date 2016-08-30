@@ -9,13 +9,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class ChatServer {
-  public static final int PORT = 4444;
-
   private final ServerSocket serverSocket;
   private final Map<String, PrintWriter> users;
 
-  public ChatServer() throws IOException {
-    serverSocket = new ServerSocket(PORT);
+  public ChatServer(int port) throws IOException {
+    serverSocket = new ServerSocket(port);
     users = new ConcurrentHashMap<>();
   }
 
@@ -33,11 +31,7 @@ public class ChatServer {
   }
 
   boolean addUser(String username, PrintWriter writer) {
-    if (users.containsKey(username)) {
-      return false;
-    }
-    users.put(username, writer);
-    return true;
+    return users.putIfAbsent(username, writer) == null;
   }
 
   void removeUser(String username) {
